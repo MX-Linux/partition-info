@@ -134,7 +134,7 @@ main() {
     [ $# -gt 0 ] && fatal "Expected only one command. Got: $cmnd $*"
 
     local ex_param
-    for ex_param in ${EXCLUDE/,/ /}; do
+    for ex_param in $(echo $EXCLUDE | sed 's/,/ /g'); do
         case $ex_param in
             boot|b) EX_BOOT=true                                 ;;
             swap|s) EX_SWAP=true                                 ;;
