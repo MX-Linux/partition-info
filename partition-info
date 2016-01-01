@@ -339,9 +339,7 @@ _do_parts() {
 
         #echo "$line"; #continue
 
-        # Require a trailing digit in $NAME
-        # (we may need to change this for LVM)
-        [ -n "$NAME" -a -z "${NAME%%*[0-9]}" ] || continue
+        [ "$TYPE" = "disk" ] && continue
 
         # Ignore extended boot record partitions
         case $PARTTYPE in 0xf) continue;; esac
@@ -390,7 +388,7 @@ Lsblk
 
 get_size() {
     local part=$1
-    local drive=$(echo $part | sed -r 's/[0-9]+$//')
+    local drive=$(echo $part | sed -r 's/[p0-9]?[0-9]$//')
     local path=$drive
     [ "$drive" != "$part" ] && path=$drive/$part
     local file=/sys/block/$path/size
@@ -399,7 +397,7 @@ get_size() {
 
 is_usb() {
     local dev=${1##*/}
-    local drive=$(echo $dev | sed -r 's/[0-9]+$//')
+    local drive=$(echo $dev | sed -r 's/[p0-9]?[0-9]$//')
     local dir=/sys/block/$drive
     local devpath=$(readlink -f $dir/device)
     [ "$devpath" ] || return 1
