@@ -318,14 +318,16 @@ _do_parts() {
     local dev_width=$(get_dev_width $MAJOR_ARG $the_dev)
     local  fs_width=$(get_field_width fstype -n $MAJOR_ARG $the_dev)
 
-    local format
+    local format lablab
     if [ "$TAB_DELIMIT" ]; then
         format="%s\t%s\t%s\t%s"
+        lablab="Label"
     else
         format="%-${dev_width}s - %6s - %-${fs_width}s%s"
+        lablab=" - Label"
     fi
 
-    [ "$SHOW_HEADER" ] && printf "$format\n" Name Size FS Label | sed 's/ - /   /g'
+    [ "$SHOW_HEADER" ] && printf "$format\n" Name Size FS "$lablab" | sed 's/ - /   /g'
 
     local NAME SIZE FSTYPE PARTTYPE TYPE LABEL
     while read line; do
