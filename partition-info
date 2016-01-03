@@ -382,7 +382,7 @@ _do_parts() {
         printf "$format" "$DEV_OUTPUT$NAME" "$SIZE" "$FSTYPE" "$label"
         echo
     done<<Lsblk
-    $(lsblk $MAJOR_ARG $LSBLK_ARGS --output $PARTS_FIELDS $the_dev)
+$(lsblk $MAJOR_ARG $LSBLK_ARGS --output $PARTS_FIELDS $the_dev)
 Lsblk
 }
 
