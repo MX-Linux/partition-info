@@ -386,9 +386,17 @@ _do_parts() {
 Lsblk
 }
 
+get_drive() {
+    local drive part=${1##*/}
+    case $part in
+        mmcblk*) echo ${part%p[0-9]}                        ;;
+              *) drive=${part%[0-9]}  ; echo ${drive%[0-9]} ;;
+    esac
+}
+
 get_size() {
-    local part=$1
-    local drive=$(echo $part | sed -r 's/[p0-9]?[0-9]$//')
+    local part=${1##*/}
+    local drive=$(get_drive $part)
     local path=$drive
     [ "$drive" != "$part" ] && path=$drive/$part
     local file=/sys/block/$path/size
@@ -396,8 +404,8 @@ get_size() {
 }
 
 is_usb() {
-    local dev=${1##*/}
-    local drive=$(echo $dev | sed -r 's/[p0-9]?[0-9]$//')
+    local part=${1##*/}
+    local drive=$(get_drive $part)
     local dir=/sys/block/$drive
     local devpath=$(readlink -f $dir/device)
     [ "$devpath" ] || return 1
