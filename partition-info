@@ -216,7 +216,7 @@ do_is_linux() {
 
     case $PARTTYPE in
         0x83|0fc63daf-8483-4772-8e79-3d69d8477de4) success ;;
-             ebd0a0a2-b9e5-4433-87c0-68b6b72699c7)         ;;
+          ""|ebd0a0a2-b9e5-4433-87c0-68b6b72699c7)         ;;
                                                 *) failure ;;
     esac
 
