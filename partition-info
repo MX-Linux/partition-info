@@ -65,6 +65,9 @@ Commands:
         Return 1 and print "no" if it is not.
         Return 2 and print an error message if there is an error.
 
+    split-device=<device>
+        Split <device> into a root device name and a partition number
+
     swap
         Display information for all swap partitions
 
@@ -161,11 +164,12 @@ main() {
         && fatal "This progam must be run as root on Debian systems"
 
     case $cmnd in
-           all) do_all_parts                 ;;
-        drives) do_drives                    ;;
-     is-linux*) do_is_linux $cmnd            ;;
-          swap) ONLY_SWAP=true; do_all_parts ;;
-             *) do_parts $cmnd               ;;
+                all) do_all_parts                 ;;
+             drives) do_drives                    ;;
+          is-linux*) do_is_linux $cmnd            ;;
+      split-device*) do_split_device $cmnd        ;;
+               swap) ONLY_SWAP=true; do_all_parts ;;
+                  *) do_parts $cmnd               ;;
     esac
 
     exit 0
@@ -195,6 +199,25 @@ takes_param() {
         -exclude|-major-num|-min-size|[emM]) return 0 ;;
     esac
     return 1
+}
+
+do_split_device() {
+    local cmnd=$1  dev=${1#split-device=}
+
+    [ ${#dev} -eq 0 -o "$cmnd" = "$dev" ] && fatal "Must use \"split-device=<device>\""
+    dev=${dev#/dev/}
+
+    local root part
+    case $dev in
+        mmcblk*p[1-9]) root=${dev%p[1-9]}  ; part=${dev#${root}p}  ;;
+              mmcblk*) root=$dev                                   ;;
+                    *) root=${dev%[0-9]}   ; root=${root%[0-9]}
+                       part=${dev#$root}                           ;;
+    esac
+
+    echo "$root $part" | sed 's/ $//'
+    [ ${#part} -gt 0 ]
+    exit $?
 }
 
 do_is_linux() {
