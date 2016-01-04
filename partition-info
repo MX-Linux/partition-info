@@ -237,8 +237,20 @@ do_is_linux() {
     local FSTYPE PARTTYPE
     eval $(lsblk -Pno fstype,parttype $dev)
 
+    # See: http://sourceforge.net/p/gptfdisk/code/ci/master/tree/parttypes.cc
     case $PARTTYPE in
+
+        # Linux data
         0x83|0fc63daf-8483-4772-8e79-3d69d8477de4) success ;;
+        # Linux swap
+        0x82|0657fd6d-a4ab-43c4-84e5-0933c84b4f4f) success ;;
+             # Linux /home
+             933ac7e1-2eb4-4f13-b844-0e14e2aef915) success ;;
+             # Linux /root x86
+             44479540-f297-41b2-9af7-d131d5f0458a) success ;;
+             # Linux /root x86-64
+             4f68bce3-e8cd-4db1-96e7-fbcaf984b709) success ;;
+          # No part-type or Windows data
           ""|ebd0a0a2-b9e5-4433-87c0-68b6b72699c7)         ;;
                                                 *) failure ;;
     esac
