@@ -1,3 +1,9 @@
+partition-info (1.0mx150+3) mx; urgency=medium
+
+  * add new commands: find-esp, split-device, better Linux fs detection
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 05 Jan 2016 14:58:52 -0500
+
 partition-info (1.0mx150+1) mx; urgency=low
 
   * Initial release

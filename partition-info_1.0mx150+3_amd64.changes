@@ -1,0 +1,43 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Format: 1.8
+Date: Tue, 05 Jan 2016 14:58:52 -0500
+Source: partition-info
+Binary: partition-info
+Architecture: source all
+Version: 1.0mx150+3
+Distribution: mx
+Urgency: medium
+Maintainer: anticapitalista <antiX@operamail.com>
+Changed-By: Adrian <adrian@mxlinux.org>
+Description:
+ partition-info - Tool to list GPT and msdos partition info in similar format
+Changes:
+ partition-info (1.0mx150+3) mx; urgency=medium
+ .
+   * add new commands: find-esp, split-device, better Linux fs detection
+Checksums-Sha1:
+ 256c34c54816fd7b732e1c551a59bbdb861cc449 1092 partition-info_1.0mx150+3.dsc
+ 7cad9fc82ce0a9e1346861c99d755706206db2b3 18348 partition-info_1.0mx150+3.tar.xz
+ 5982060c196e2c1b66f32a2e44b48c9fc1155894 7948 partition-info_1.0mx150+3_all.deb
+Checksums-Sha256:
+ c3c6e6c76c78d46c3dd48476b78ebe7eeaf3eb23fc6294a3158a66769735602a 1092 partition-info_1.0mx150+3.dsc
+ 35a3679509879360174085b5abd0a7e2306b820a45a04aeb67f56d3a2d1510aa 18348 partition-info_1.0mx150+3.tar.xz
+ 682503154ba6ab948de58dbd9219068f89c9c74ca0c614e28593e4ad7dd66c08 7948 partition-info_1.0mx150+3_all.deb
+Files:
+ 847c29edd1829b931f38f2612d7bb0b3 1092 utils extra partition-info_1.0mx150+3.dsc
+ fc78fe401f5a9f5cea76bcb0e3429fb5 18348 utils extra partition-info_1.0mx150+3.tar.xz
+ a30c497090e457cd9acebcc3c696d773 7948 utils extra partition-info_1.0mx150+3_all.deb
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQEcBAEBAgAGBQJWjCDKAAoJEHCTjHgGee6YqogH/RDi2cbXWE/MwBvCJo+z4t+G
+EDnz8V0CyB2cJLxJqd1NXhWTP/U3/CLhQRLtQNKcyHvZejUCJuXPvg7yuItkuqWr
+BZ/edKLp1+W3xlnoK8I4xTdFZU2lDOr8yVsX8vx8Q8scQMnsMZrKFf9KOnhrgRpk
+/E7xpJmufHrvPVCPAVfemY5Swtbfa+PbFeDv94S3GBkNz3GkJ5D03CzQfbssja8J
+x456g/8bemZzXWD3zBccGnoJX9j659sL0JjpFXh9j8jreNqOn7M7pvW+LHV6ORpS
+Od052TxsyQIbyt9ziOL8YmHEKuIF2PTXNujF71b8M1FGSCcdEEdMnFFpI0yXNzM=
+=gqHD
+-----END PGP SIGNATURE-----

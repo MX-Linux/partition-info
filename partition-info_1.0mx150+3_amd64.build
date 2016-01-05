@@ -1,0 +1,55 @@
+ dpkg-buildpackage -rfakeroot -D -us -uc
+dpkg-buildpackage: source package partition-info
+dpkg-buildpackage: source version 1.0mx150+3
+dpkg-buildpackage: source distribution mx
+dpkg-buildpackage: source changed by Adrian <adrian@mxlinux.org>
+ dpkg-source --before-build build
+dpkg-buildpackage: host architecture amd64
+ fakeroot debian/rules clean
+dh clean
+   dh_testdir
+   dh_auto_clean
+   dh_clean
+ dpkg-source -b build
+dpkg-source: info: using source format `3.0 (native)'
+dpkg-source: info: building partition-info in partition-info_1.0mx150+3.tar.xz
+dpkg-source: info: building partition-info in partition-info_1.0mx150+3.dsc
+ debian/rules build
+dh build
+   dh_testdir
+   dh_auto_configure
+   dh_auto_build
+   dh_auto_test
+ fakeroot debian/rules binary
+dh binary
+   dh_testroot
+   dh_prep
+   dh_auto_install
+   dh_install
+   dh_installdocs
+   dh_installchangelogs
+   dh_pysupport
+dh_pysupport: This program is deprecated, you should use dh_python2 instead. Migration guide: http://deb.li/dhs2p
+   dh_perl
+   dh_link
+   dh_compress
+   dh_fixperms
+   dh_installdeb
+   dh_gencontrol
+dpkg-gencontrol: warning: File::FcntlLock not available; using flock which is not NFS-safe
+   dh_md5sums
+   debian/rules override_dh_builddeb
+make[1]: Entering directory '/home/adrian/build'
+dh_builddeb -- -Z xz
+dpkg-deb: building package `partition-info' in `../partition-info_1.0mx150+3_all.deb'.
+make[1]: Leaving directory '/home/adrian/build'
+ dpkg-genchanges  >../partition-info_1.0mx150+3_amd64.changes
+dpkg-genchanges: including full source code in upload
+ dpkg-source --after-build build
+dpkg-buildpackage: full upload; Debian-native package (full source is included)
+Now signing changes and any dsc files...
+ signfile partition-info_1.0mx150+3.dsc Adrian <adrian@mxlinux.org>
+
+ signfile partition-info_1.0mx150+3_amd64.changes Adrian <adrian@mxlinux.org>
+
+Successfully signed dsc and changes files
