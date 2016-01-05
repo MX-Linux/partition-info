@@ -60,8 +60,11 @@ Commands:
           name, size, rotational, remove/usb, # of parts, model, and labels
 
     find-esp=<device>
-        Return the name of the first ESP partition on the same disk
-        device as <device>
+        Print the name of the first ESP partition on the same disk
+        device as <device>.  Returns success whether an ESP partition was
+        found or not. An empty string sigifies no ESP partition was found.
+        Failure indicates a problem with the command line argument or a
+        non-existent device.
 
     is-linux=<device>
         Determine if <device> is a Linux partition.
