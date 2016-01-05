@@ -59,6 +59,10 @@ Commands:
         If --full is given then list:
           name, size, rotational, remove/usb, # of parts, model, and labels
 
+    find-esp=<device>
+        Return the name of the first ESP partition on the same disk
+        device as <device>
+
     is-linux=<device>
         Determine if <device> is a Linux partition.
         Return 0 and print "yes" if it is.
@@ -168,6 +172,7 @@ main() {
              drives) do_drives                    ;;
           is-linux*) do_is_linux $cmnd            ;;
       split-device*) do_split_device $cmnd        ;;
+          find-esp*) do_find_esp $cmnd            ;;
                swap) ONLY_SWAP=true; do_all_parts ;;
                   *) do_parts $cmnd               ;;
     esac
@@ -199,6 +204,20 @@ takes_param() {
         -exclude|-major-num|-min-size|[emM]) return 0 ;;
     esac
     return 1
+}
+
+do_find_esp() {
+    local cmnd=$1  dev=${1#find-esp=}
+
+    [ ${#dev} -eq 0 -o "$cmnd" = "$dev" ] && fatal "Must use \"find-esp=<device>\""
+    dev=${dev#/dev/}
+
+    local drive=$(get_drive $dev)
+    [ ${#drive} -gt 0 ] || fatal "No root device name found"
+    test -b /dev/$drive || fatal "Root device /dev/$drive not found"
+
+    local expr="(c12a7328-f81f-11d2-ba4b-00a0c93ec93b|0xef)$"
+    lsblk -nlo name,parttype /dev/$drive | egrep "$expr" | head -n1 | awk '{print $1}'
 }
 
 do_split_device() {
